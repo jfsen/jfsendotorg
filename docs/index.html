@@ -1,277 +1,461 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='outer' cx='45%25' cy='35%25' r='85%25'%3E%3Cstop offset='0%25' stop-color='%23f472b6'/%3E%3Cstop offset='45%25' stop-color='%23ec4899'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3CradialGradient id='inner' cx='50%25' cy='50%25' r='42%25'%3E%3Cstop offset='0%25' stop-color='%23c084fc'/%3E%3Cstop offset='50%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%237c3aed00'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='48' fill='url(%23outer)'/%3E%3Ccircle cx='50' cy='50' r='39' fill='%230f0f1a' opacity='0.78'/%3E%3Ccircle cx='50' cy='50' r='50' fill='url(%23inner)' opacity='0.5'/%3E%3C/svg%3E" type="image/svg+xml">
-  <title>jfsen • Portfolio</title>
-  
-  <style>
-    :root {
-      /* ── Base dark theme ── */
-      --bg-base: #0f0f1a;
-      --accent: #7c3aed;
-      --accent-glow: #a78bfa66;
-      --accent-secondary: #ec4899;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --card-bg: rgba(30, 30, 60, 0.35);
-      --card-border: rgba(120, 113, 166, 0.18);
-      --card-glow: rgba(124, 58, 237, 0.15);
-      --radius: 1.6rem;
-      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='outer' cx='45%25' cy='35%25' r='85%25'%3E%3Cstop offset='0%25' stop-color='%23f472b6'/%3E%3Cstop offset='45%25' stop-color='%23ec4899'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3CradialGradient id='inner' cx='50%25' cy='50%25' r='42%25'%3E%3Cstop offset='0%25' stop-color='%23c084fc'/%3E%3Cstop offset='50%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%237c3aed00'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='48' fill='url(%23outer)'/%3E%3Ccircle cx='50' cy='50' r='39' fill='%230f0f1a' opacity='0.78'/%3E%3Ccircle cx='50' cy='50' r='50' fill='url(%23inner)' opacity='0.5'/%3E%3C/svg%3E"
+            type="image/svg+xml"
+        />
+        <title>jfsen • Portfolio</title>
 
-    [data-theme="light"] {
-      --bg-base: #f8fafc;
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --card-bg: rgba(255, 255, 255, 0.65);
-      --card-border: rgba(226, 232, 240, 0.7);
-      --card-glow: rgba(124, 58, 237, 0.08);
-    }
+        <style>
+            :root {
+                /* ── Base dark theme ── */
+                --bg-base: #0f0f1a;
+                --accent: #7c3aed;
+                --accent-glow: #a78bfa66;
+                --accent-secondary: #ec4899;
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --card-bg: rgba(30, 30, 60, 0.35);
+                --card-border: rgba(120, 113, 166, 0.18);
+                --card-glow: rgba(124, 58, 237, 0.15);
+                --radius: 1.6rem;
+                --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+            [data-theme="light"] {
+                --bg-base: #f8fafc;
+                --text-primary: #0f172a;
+                --text-secondary: #475569;
+                --card-bg: rgba(255, 255, 255, 0.65);
+                --card-border: rgba(226, 232, 240, 0.7);
+                --card-glow: rgba(124, 58, 237, 0.08);
+            }
 
-    body {
-      min-height: 100dvh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg-base);
-      color: var(--text-primary);
-      background-image: 
-        radial-gradient(circle at 15% 15%, #4f46e533 0%, transparent 35%),
-        radial-gradient(circle at 85% 25%, #ec489933 0%, transparent 40%),
-        radial-gradient(circle at 30% 90%, #7c3aed22 0%, transparent 45%),
-        radial-gradient(circle at 70% 70%, #a855f722 0%, transparent 50%);
-      background-attachment: fixed;
-      overflow-x: hidden;
-    }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-    .container {
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem 4rem;
-      gap: 4rem;
-      position: relative;
-      z-index: 1;
-    }
+            body {
+                min-height: 100dvh;
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    sans-serif;
+                background: var(--bg-base);
+                color: var(--text-primary);
+                background-image:
+                    radial-gradient(
+                        circle at 15% 15%,
+                        #4f46e533 0%,
+                        transparent 35%
+                    ),
+                    radial-gradient(
+                        circle at 85% 25%,
+                        #ec489933 0%,
+                        transparent 40%
+                    ),
+                    radial-gradient(
+                        circle at 30% 90%,
+                        #7c3aed22 0%,
+                        transparent 45%
+                    ),
+                    radial-gradient(
+                        circle at 70% 70%,
+                        #a855f722 0%,
+                        transparent 50%
+                    );
+                overflow-x: hidden;
+            }
 
-    header {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
+            .container {
+                min-height: 100dvh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem 1rem 4rem;
+                gap: 4rem;
+                position: relative;
+                z-index: 1;
+            }
 
-    h1 {
-      font-size: clamp(3.2rem, 8vw, 6.5rem);
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: shine 8s linear infinite;
-    }
+            header {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
 
-    @keyframes shine {
-      to { background-position: 200% center; }
-    }
+            h1 {
+                font-size: clamp(3.2rem, 8vw, 6.5rem);
+                font-weight: 800;
+                letter-spacing: -0.05em;
+                background: linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent-secondary)
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                background-size: 200% auto;
+                animation: shine 8s linear infinite;
+            }
 
-    .subtitle {
-      margin-top: 1rem;
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
-      color: var(--text-secondary);
-      max-width: 42ch;
-      text-align: center;
-      line-height: 1.5;
-    }
+            @keyframes shine {
+                to {
+                    background-position: 200% center;
+                }
+            }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      width: 100%;
-      max-width: 1200px;
-    }
+            .subtitle {
+                margin-top: 1rem;
+                font-size: clamp(1.1rem, 3vw, 1.4rem);
+                color: var(--text-secondary);
+                max-width: 56ch;
+                text-align: center;
+                line-height: 1.5;
+            }
 
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(18px) saturate(190%);
-      -webkit-backdrop-filter: blur(18px) saturate(190%);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      cursor: pointer;
-      height: 100%;
-    }
+            .cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                width: 100%;
+                max-width: 1200px;
+            }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: -50%;
-      background: radial-gradient(
-        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        var(--accent-glow) 0%,
-        transparent 65%
-      );
-      opacity: 0;
-      transition: opacity 0.7s ease;
-      pointer-events: none;
-      z-index: -1;
-    }
+            .card {
+                background: var(--card-bg);
+                backdrop-filter: blur(18px) saturate(190%);
+                -webkit-backdrop-filter: blur(18px) saturate(190%);
+                border: 1px solid var(--card-border);
+                border-radius: var(--radius);
+                padding: 1.5rem;
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                position: relative;
+                overflow: hidden;
+                text-decoration: none;
+                color: inherit;
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+                cursor: pointer;
+                height: 100%;
+                will-change: transform;
+            }
 
-    .card:hover::before,
-    .card:focus-visible::before {
-      opacity: 0.8;
-    }
+            .card::before {
+                content: "";
+                position: absolute;
+                inset: -50%;
+                background: radial-gradient(
+                    circle at 50% 50%,
+                    var(--accent-glow) 0%,
+                    transparent 65%
+                );
+                opacity: 0;
+                transition: opacity 0.4s ease;
+                pointer-events: none;
+                z-index: -1;
+            }
 
-    .card:hover,
-    .card:focus-visible {
-      transform: translateY(-12px) scale(1.03);
-      box-shadow: 
-        0 35px 70px -20px rgba(0,0,0,0.4),
-        0 0 0 1.8px var(--accent-glow);
-      border-color: rgba(167, 139, 250, 0.45);
-    }
+            .card:hover::before,
+            .card:focus-visible::before {
+                opacity: 0.8;
+            }
 
-    .project-image {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 0.9rem;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(120,113,166,0.3);
-      transition: transform 0.5s ease;
-    }
+            .card:hover,
+            .card:focus-visible {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow:
+                    0 25px 50px -15px rgba(0, 0, 0, 0.3),
+                    0 0 0 1.5px var(--accent-glow);
+                border-color: rgba(167, 139, 250, 0.45);
+            }
 
-    .card:hover .project-image {
-      transform: scale(1.04);
-    }
+            .project-image {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 0.9rem;
+                background: rgba(0, 0, 0, 0.25);
+                border: 1px solid rgba(120, 113, 166, 0.3);
+                transition: transform 0.5s ease;
+            }
 
-    .card h3 {
-      font-size: 1.45rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--text-primary), var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-top: 0.4rem;
-    }
+            .card:hover .project-image {
+                transform: scale(1.04);
+            }
 
-    .card p {
-      color: var(--text-secondary);
-      font-size: 0.97rem;
-      line-height: 1.6;
-      flex-grow: 1;
-      opacity: 0.93;
-    }
+            .card h3 {
+                font-size: 1.45rem;
+                font-weight: 700;
+                background: linear-gradient(
+                    90deg,
+                    var(--text-primary),
+                    var(--accent)
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                margin-top: 0.4rem;
+            }
 
-    .theme-toggle {
-      position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: var(--transition);
-      z-index: 10;
-    }
+            .card p {
+                color: var(--text-secondary);
+                font-size: 0.97rem;
+                line-height: 1.6;
+                flex-grow: 1;
+                opacity: 0.93;
+            }
 
-    .theme-toggle:hover {
-      transform: scale(1.15);
-    }
-  </style>
-</head>
-<body>
+            .theme-toggle {
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: var(--card-bg);
+                backdrop-filter: blur(12px);
+                border: 1px solid var(--card-border);
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+                transition: var(--transition);
+                z-index: 10;
+            }
 
-  <div class="container">
-    <header>
-      <h1>jfsen</h1>
-      <div class="subtitle">
-        Programming Projects • Experiments • Learning Journey
-      </div>
-    </header>
+            .theme-toggle:hover {
+                transform: scale(1.15);
+            }
 
-    <div class="cards">
+            /* ── Mobile performance overrides ── */
+            @media (max-width: 768px) {
+                body {
+                    background-image:
+                        radial-gradient(
+                            circle at 15% 15%,
+                            #4f46e533 0%,
+                            transparent 45%
+                        ),
+                        radial-gradient(
+                            circle at 85% 25%,
+                            #ec489922 0%,
+                            transparent 50%
+                        );
+                }
+                .card {
+                    backdrop-filter: blur(8px) saturate(120%);
+                    -webkit-backdrop-filter: blur(8px) saturate(120%);
+                }
+                .card:hover,
+                .card:focus-visible {
+                    transform: translateY(-4px) scale(1.01);
+                    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
+                }
+                .cards {
+                    gap: 1.25rem;
+                    grid-template-columns: 1fr;
+                }
+                .container {
+                    padding: 1.5rem 1rem 3rem;
+                    gap: 2.5rem;
+                }
+                .theme-toggle {
+                    top: 1rem;
+                    right: 1rem;
+                    width: 40px;
+                    height: 40px;
+                }
+                h1 {
+                    animation: none;
+                }
+            }
 
-      <a href="https://github.com/jfsen/Wince" class="card" target="_blank" rel="noopener">
-        <img
-          src="https://share.jfsen.org/Wince.jpeg"
-          alt="Wince"
-          class="project-image"/>
-        <h3>Wince</h3>
-        <p>My first GUI project on my Python journey. Written as a frontend for the bash script "wtwitch" I chose tkinter as the Python-native toolkit. Allows the user to watch Twitch streams in a local media player.</p>
-      </a>
+            /* ── Reduced motion ── */
+            @media (prefers-reduced-motion: reduce) {
+                h1 {
+                    animation: none;
+                }
+                .card,
+                .project-image,
+                .card::before,
+                .theme-toggle {
+                    transition: none !important;
+                }
+                .card:hover,
+                .card:focus-visible {
+                    transform: none;
+                }
+                .card:hover .project-image {
+                    transform: none;
+                }
+                .card::before {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>jfsen</h1>
+                <div class="subtitle">
+                    Programming Projects • Experiments • Learning Journey
+                </div>
+            </header>
 
-      <a href="https://github.com/jfsen/Python-exercises" class="card" target="_blank" rel="noopener">
-        <img
-          src="https://share.jfsen.org/Python-exercises.jpeg"
-          alt="Python-exercises"
-          class="project-image"/>
-        <h3>Python Exercises</h3>
-        <p>My learning progress in Python - solved exercises, small scripts, challenges from books/courses, and growing coding habits.</p>
-      </a>
+            <div class="cards">
+                <a
+                    href="https://github.com/jfsen/Wince"
+                    class="card"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    <img
+                        src="https://share.jfsen.org/Wince.jpeg"
+                        alt="Wince"
+                        class="project-image"
+                        loading="lazy"
+                        width="600"
+                        height="338"
+                    />
+                    <h3>Wince</h3>
+                    <p>
+                        My first GUI project on my Python journey. Written as a
+                        frontend for the bash script "wtwitch" I chose tkinter
+                        as the Python-native toolkit. The program allows the
+                        user to watch live streams in a local media player.
+                    </p>
+                </a>
 
-      <a href="#" class="card">
-        <img 
-          src="https://share.jfsen.org/rpi4.jpg" 
-          alt="Raspberry Pi 4 sensors project" 
-          class="project-image"
+                <a
+                    href="https://github.com/jfsen/Python-exercises"
+                    class="card"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    <img
+                        src="https://share.jfsen.org/Python-exercises.jpeg"
+                        alt="Python-exercises"
+                        class="project-image"
+                        loading="lazy"
+                        width="600"
+                        height="338"
+                    />
+                    <h3>Python Exercises</h3>
+                    <p>
+                        My learning progress in Python - solved exercises, small
+                        scripts, challenges from books/courses, and growing
+                        coding habits.
+                    </p>
+                </a>
+
+                <a href="#" class="card">
+                    <img
+                        src="https://share.jfsen.org/rpi.jpg"
+                        alt="Raspberry Pi 4 sensors project"
+                        class="project-image"
+                        loading="lazy"
+                        width="600"
+                        height="338"
+                    />
+                    <h3>Raspberry Pi 4 Sensor Kit</h3>
+                    <p>
+                        My latest hobby project is to deepen my programming
+                        knowledge by tinkering with a sensor kit for my
+                        Raspberry Pi. Includes breadboards, displays, electric
+                        motors and all the sensors one might need for a weather
+                        station or motion detector.
+                    </p>
+                </a>
+
+                <a href="#" class="card">
+                    <img
+                        src="https://share.jfsen.org/streamline.png"
+                        alt="Streamline"
+                        class="project-image"
+                        loading="lazy"
+                        width="600"
+                        height="338"
+                    />
+                    <h3>Streamline</h3>
+                    <p>
+                        Started as an AI-aided reimplementation of Wince in
+                        Libadwaita. Calls directly to the Twitch API and fits
+                        well with the GNOME desktop for Linux.
+                    </p>
+                </a>
+
+                <a href="https://nc.jfsen.org" class="card">
+                    <img
+                        src="https://share.jfsen.org/nextcloud.jpg"
+                        alt="Nextcloud"
+                        class="project-image"
+                        loading="lazy"
+                        width="600"
+                        height="338"
+                    />
+                    <h3>Nextcloud</h3>
+                    <p>
+                        I run various services like Nextcloud as Docker
+                        containers on my own Ubuntu server. Secured with
+                        fail2ban, a reverse proxy and other measures, it's an
+                        exercise in network security.
+                    </p>
+                </a>
+
+                <a href="https://github.com/jfsen/Excel-uebungen" class="card">
+                    <img
+                        src="https://share.jfsen.org/excel-uebungen.jpeg"
+                        alt="Excel exercises"
+                        class="project-image"
+                        loading="lazy"
+                        width="600"
+                        height="338"
+                    />
+                    <h3>Excel class</h3>
+                    <p>
+                        As part of a class on Microsoft Office, I refreshed my
+                        knowledge on the basics and delved into more advanced
+                        exercises for Excel spreadsheets.
+                    </p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Theme toggle -->
+        <div
+            class="theme-toggle"
+            onclick="
+                document.documentElement.dataset.theme =
+                    document.documentElement.dataset.theme === 'dark'
+                        ? 'light'
+                        : 'dark'
+            "
         >
-        <h3>Raspberry Pi 4 Sensor Kit</h3>
-        <p>My latest hobby project is to deepen my programming knowledge by tinkering with a sensor kit for my Raspberry Pi. Includes breadboards, displays, electric motors and all the sensors one might need for a weather station or motion detector.</p>
-      </a>
-
-      <a href="#" class="card">
-        <img src="https://share.jfsen.org/streamline.png" alt="Streamline" class="project-image">
-        <h3>Streamline</h3>
-        <p>Started as an AI-aided reimplementation of Wince in Libadwaita. Calls directly to the Twitch API and fits well with the GNOME desktop for Linux.</p>
-      </a>
-
-      <a href="https://nc.jfsen.org" class="card">
-        <img src="https://share.jfsen.org/nextcloud.png" alt="Nextcloud" class="project-image">
-        <h3>Nextcloud</h3>
-        <p>I run various services like Nextcloud as Docker containers on my own Ubuntu server. Secured with fail2ban and other security measures, it's an exercise in network security.</p>
-      </a>
-
-      <a href="https://github.com/jfsen/Excel-uebungen" class="card">
-        <img src="https://share.jfsen.org/Excel-uebungen.jpeg" alt="Excel exercises" class="project-image">
-        <h3>Excel class</h3>
-        <p>As part of a class on Microsoft Office, I refreshed my knowledge on the basics and delved into more advanced exercises on Excel spreadsheets.</p>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- Theme toggle -->
-  <div class="theme-toggle" onclick="document.documentElement.dataset.theme = 
-    document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="5"/>
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-    </svg>
-  </div>
-
-</body>
+            <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <circle cx="12" cy="12" r="5" />
+                <path
+                    d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                />
+            </svg>
+        </div>
+    </body>
 </html>

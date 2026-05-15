@@ -149,6 +149,8 @@
                 gap: 1.25rem;
                 cursor: pointer;
                 height: 100%;
+                /* Desktop should use will-change for smooth hovers;
+                   mobile resets this to auto in the media query below. */
                 will-change: transform;
             }
 
@@ -241,26 +243,37 @@
             /* ── Mobile performance overrides ── */
             @media (max-width: 768px) {
                 body {
-                    background-image:
-                        radial-gradient(
-                            circle at 15% 15%,
-                            #4f46e533 0%,
-                            transparent 45%
-                        ),
-                        radial-gradient(
-                            circle at 85% 25%,
-                            #ec489922 0%,
-                            transparent 50%
-                        );
+                    /* Single, simple gradient instead of 4 layered radial gradients.
+                       Firefox on mobile suffers badly from multiple gradient layers. */
+                    background-image: radial-gradient(
+                        circle at 50% 50%,
+                        #4f46e522 0%,
+                        transparent 100%
+                    );
                 }
                 .card {
-                    backdrop-filter: blur(8px) saturate(120%);
-                    -webkit-backdrop-filter: blur(8px) saturate(120%);
+                    /* backdrop-filter is extremely expensive on mobile Firefox.
+                       The card background is already translucent, so we drop the
+                       filter entirely and rely on the semi-transparent bg. */
+                    backdrop-filter: none;
+                    -webkit-backdrop-filter: none;
+                    /* Don't force every card onto its own compositor layer.
+                       On mobile this increases memory pressure and hurts perf. */
+                    will-change: auto;
+                }
+                .card::before {
+                    display: none;
                 }
                 .card:hover,
                 .card:focus-visible {
-                    transform: translateY(-4px) scale(1.01);
-                    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
+                    /* Touch devices have no real hover; minimal transform to avoid
+                       expensive compositor work on scroll. */
+                    transform: translateY(-2px);
+                    box-shadow: none;
+                    border-color: rgba(167, 139, 250, 0.3);
+                }
+                .card:hover .project-image {
+                    transform: none;
                 }
                 .cards {
                     gap: 1.25rem;
@@ -278,6 +291,11 @@
                 }
                 h1 {
                     animation: none;
+                }
+                /* Skip painting offscreen cards until they're close to viewport */
+                .card {
+                    content-visibility: auto;
+                    contain-intrinsic-size: 380px;
                 }
             }
 

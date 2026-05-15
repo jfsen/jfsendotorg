@@ -11,6 +11,10 @@
         <title>jfsen • Portfolio</title>
 
         <style>
+            /* ═══════════════════════════════════════════
+               THEME TOKENS (CSS custom properties)
+               ═══════════════════════════════════════════ */
+
             :root {
                 /* ── Base dark theme ── */
                 --bg-base: #0f0f1a;
@@ -26,6 +30,7 @@
                 --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             }
 
+            /* ── Light theme override ── */
             [data-theme="light"] {
                 --bg-base: #f8fafc;
                 --text-primary: #0f172a;
@@ -35,11 +40,19 @@
                 --card-glow: rgba(124, 58, 237, 0.08);
             }
 
+            /* ═══════════════════════════════════════════
+               RESET
+               ═══════════════════════════════════════════ */
+
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
+
+            /* ═══════════════════════════════════════════
+               BODY & BACKGROUND
+               ═══════════════════════════════════════════ */
 
             body {
                 min-height: 100dvh;
@@ -76,6 +89,10 @@
                 overflow-x: hidden;
             }
 
+            /* ═══════════════════════════════════════════
+               LAYOUT CONTAINERS
+               ═══════════════════════════════════════════ */
+
             .container {
                 min-height: 100dvh;
                 display: flex;
@@ -87,6 +104,10 @@
                 position: relative;
                 z-index: 1;
             }
+
+            /* ═══════════════════════════════════════════
+               HEADER & TITLE
+               ═══════════════════════════════════════════ */
 
             header {
                 text-align: center;
@@ -124,6 +145,10 @@
                 line-height: 1.5;
             }
 
+            /* ═══════════════════════════════════════════
+               CARDS GRID
+               ═══════════════════════════════════════════ */
+
             .cards {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -131,6 +156,10 @@
                 width: 100%;
                 max-width: 1200px;
             }
+
+            /* ═══════════════════════════════════════════
+               CARD (individual project tile)
+               ═══════════════════════════════════════════ */
 
             .card {
                 background: var(--card-bg);
@@ -154,6 +183,7 @@
                 will-change: transform;
             }
 
+            /* ── Card glow overlay (revealed on hover) ── */
             .card::before {
                 content: "";
                 position: absolute;
@@ -182,6 +212,10 @@
                     0 0 0 1.5px var(--accent-glow);
                 border-color: rgba(167, 139, 250, 0.45);
             }
+
+            /* ═══════════════════════════════════════════
+               PROJECT IMAGE
+               ═══════════════════════════════════════════ */
 
             .project-image {
                 width: 100%;
@@ -219,6 +253,10 @@
                 opacity: 0.93;
             }
 
+            /* ═══════════════════════════════════════════
+               THEME TOGGLE BUTTON
+               ═══════════════════════════════════════════ */
+
             .theme-toggle {
                 position: fixed;
                 top: 1.5rem;
@@ -240,7 +278,9 @@
                 transform: scale(1.15);
             }
 
-            /* ── Mobile performance overrides ── */
+            /* ═══════════════════════════════════════════
+               MOBILE OVERRIDES  (max-width: 768px)
+               ═══════════════════════════════════════════ */
             @media (max-width: 768px) {
                 body {
                     /* Single, simple gradient instead of 4 layered radial gradients.
@@ -296,7 +336,9 @@
                 }
             }
 
-            /* ── Reduced motion ── */
+            /* ═══════════════════════════════════════════
+               REDUCED MOTION  (user preference)
+               ═══════════════════════════════════════════ */
             @media (prefers-reduced-motion: reduce) {
                 h1 {
                     animation: none;

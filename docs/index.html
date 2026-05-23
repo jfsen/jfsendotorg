@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="de" data-theme="light">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,7 @@
             href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='outer' cx='45%25' cy='35%25' r='85%25'%3E%3Cstop offset='0%25' stop-color='%23f472b6'/%3E%3Cstop offset='45%25' stop-color='%23ec4899'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3CradialGradient id='inner' cx='50%25' cy='50%25' r='42%25'%3E%3Cstop offset='0%25' stop-color='%23c084fc'/%3E%3Cstop offset='50%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%237c3aed00'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='48' fill='url(%23outer)'/%3E%3Ccircle cx='50' cy='50' r='39' fill='%230f0f1a' opacity='0.78'/%3E%3Ccircle cx='50' cy='50' r='50' fill='url(%23inner)' opacity='0.5'/%3E%3C/svg%3E"
             type="image/svg+xml"
         />
-        <title>jfsen • Portfolio</title>
+        <title>jfsen • Projekte</title>
 
         <style>
             /* ═══════════════════════════════════════════
@@ -28,6 +28,12 @@
                 --card-glow: rgba(124, 58, 237, 0.15);
                 --radius: 1.6rem;
                 --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                /* ── About modal ── */
+                --about-bg: #1a1a35;
+                --about-header-bg: #22224a;
+                --about-border: rgba(167, 139, 250, 0.15);
+                --about-close-bg: #2e2e52;
+                --about-text-secondary: #cbd5e1;
             }
 
             /* ── Light theme override ── */
@@ -38,6 +44,12 @@
                 --card-bg: rgba(255, 255, 255, 0.65);
                 --card-border: rgba(226, 232, 240, 0.7);
                 --card-glow: rgba(124, 58, 237, 0.08);
+                /* ── About modal ── */
+                --about-bg: #ffffff;
+                --about-header-bg: #f1f5f9;
+                --about-border: rgba(226, 232, 240, 0.9);
+                --about-close-bg: #e2e8f0;
+                --about-text-secondary: var(--text-secondary);
             }
 
             /* ═══════════════════════════════════════════
@@ -87,6 +99,10 @@
                         transparent 50%
                     );
                 overflow-x: hidden;
+            }
+
+            body.no-scroll {
+                overflow: hidden;
             }
 
             /* ═══════════════════════════════════════════
@@ -279,9 +295,269 @@
             }
 
             /* ═══════════════════════════════════════════
+               ABOUT – ANCHOR (top-left)
+               ═══════════════════════════════════════════ */
+
+            .about-anchor {
+                position: fixed;
+                top: 1.5rem;
+                left: 1.5rem;
+                background: var(--card-bg);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid var(--card-border);
+                border-radius: 12px;
+                padding: 8px 16px;
+                cursor: pointer;
+                transition: var(--transition);
+                z-index: 10;
+                color: var(--text-primary);
+                font-size: 0.85rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-family: inherit;
+                user-select: none;
+            }
+
+            .about-anchor:hover {
+                transform: scale(1.08);
+                border-color: rgba(167, 139, 250, 0.45);
+                box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
+            }
+
+            .about-anchor svg {
+                flex-shrink: 0;
+            }
+
+            /* ═══════════════════════════════════════════
+               ABOUT – OVERLAY
+               ═══════════════════════════════════════════ */
+
+            .about-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.65);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+                opacity: 0;
+                visibility: hidden;
+                transition:
+                    opacity 0.3s ease,
+                    visibility 0.3s ease;
+            }
+
+            .about-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* ═══════════════════════════════════════════
+               ABOUT – MODAL
+               ═══════════════════════════════════════════ */
+
+            .about-modal {
+                position: relative;
+                width: 100%;
+                max-width: 750px;
+                max-height: 85vh;
+                background: var(--about-bg);
+                border: 1px solid var(--about-border);
+                border-radius: var(--radius);
+                overflow-y: auto;
+                color: var(--text-primary);
+                transform: scale(0.9) translateY(20px);
+                transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .about-overlay.active .about-modal {
+                transform: scale(1) translateY(0);
+            }
+
+            /* ── Close button (top-right of header) ── */
+            .about-close {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                z-index: 10;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: none;
+                background: var(--about-close-bg);
+                color: var(--text-secondary);
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+                font-size: 1.2rem;
+                transition:
+                    transform 0.2s ease,
+                    background 0.2s ease,
+                    color 0.2s ease;
+            }
+
+            .about-close:hover {
+                transform: scale(1.15);
+                background: var(--accent);
+                color: white;
+            }
+
+            /* ── About content ── */
+            .about-body {
+                padding: 2rem 2.5rem 2.5rem;
+            }
+
+            .about-header {
+                position: relative;
+                text-align: center;
+                padding: 2rem 2.5rem 1.5rem;
+                background: var(--about-header-bg);
+                border-radius: var(--radius) var(--radius) 0 0;
+            }
+
+            .about-photo {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 3px solid rgba(167, 139, 250, 0.4);
+                margin: 0 auto 1rem;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .about-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .about-header h2 {
+                font-size: 1.6rem;
+                font-weight: 800;
+                color: var(--text-primary);
+                letter-spacing: -0.03em;
+            }
+
+            .about-header .tagline {
+                color: var(--about-text-secondary);
+                font-size: 0.95rem;
+                font-weight: 500;
+                margin-top: 0.3rem;
+            }
+
+            .about-header .sub-tagline {
+                color: var(--about-text-secondary);
+                font-size: 0.85rem;
+                margin-top: 0.15rem;
+                opacity: 0.7;
+            }
+
+            .about-bio {
+                color: var(--about-text-secondary);
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin-bottom: 1.75rem;
+            }
+
+            .about-bio strong {
+                color: var(--text-primary);
+            }
+
+            .about-section-title {
+                font-size: 0.8rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: #a78bfa;
+                margin-bottom: 0.75rem;
+            }
+
+            .about-skills {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 1.75rem;
+            }
+
+            .about-skills span {
+                background: rgba(124, 58, 237, 0.12);
+                border: 1px solid rgba(167, 139, 250, 0.2);
+                color: var(--text-primary);
+                font-size: 0.82rem;
+                font-weight: 500;
+                padding: 0.35rem 0.85rem;
+                border-radius: 20px;
+            }
+
+            .about-contact-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.65rem;
+                font-size: 1rem;
+                color: var(--about-text-secondary);
+                padding: 0.75rem 0;
+            }
+
+            .about-contact-item svg {
+                flex-shrink: 0;
+                color: #a78bfa;
+            }
+
+            .about-contact-item a {
+                color: var(--about-text-secondary);
+                text-decoration: none;
+            }
+
+            .about-contact-item a:hover {
+                color: #a78bfa;
+            }
+
+            /* ═══════════════════════════════════════════
                MOBILE OVERRIDES  (max-width: 768px)
                ═══════════════════════════════════════════ */
             @media (max-width: 768px) {
+                .about-anchor {
+                    top: 1rem;
+                    left: 1rem;
+                    padding: 6px 12px;
+                    font-size: 0.78rem;
+                }
+                .about-overlay {
+                    padding: 0;
+                    align-items: flex-end;
+                }
+                .about-modal {
+                    max-width: none;
+                    max-height: 90vh;
+                    border-radius: var(--radius) var(--radius) 0 0;
+                }
+                .about-close {
+                    top: 0.75rem;
+                    right: 0.75rem;
+                    width: 32px;
+                    height: 32px;
+                }
+                .about-body {
+                    padding: 1.5rem 1.5rem 2rem;
+                }
+                .about-header {
+                    padding: 1.5rem 1.5rem 1rem;
+                }
+                .about-header h2 {
+                    font-size: 1.3rem;
+                }
+                .about-photo {
+                    width: 80px;
+                    height: 80px;
+                }
+
                 body {
                     /* Single, simple gradient instead of 4 layered radial gradients.
                        Firefox on mobile suffers badly from multiple gradient layers. */
@@ -346,7 +622,11 @@
                 .card,
                 .project-image,
                 .card::before,
-                .theme-toggle {
+                .theme-toggle,
+                .about-anchor,
+                .about-overlay,
+                .about-modal,
+                .about-close {
                     transition: none !important;
                 }
                 .card:hover,
@@ -359,6 +639,9 @@
                 .card::before {
                     display: none;
                 }
+                .about-modal {
+                    transform: none !important;
+                }
             }
         </style>
     </head>
@@ -367,7 +650,7 @@
             <header>
                 <h1>jfsen</h1>
                 <div class="subtitle">
-                    Programming Projects • Experiments • Learning Journey
+                    Programmier-Projekte • Experimente • Lernreise
                 </div>
             </header>
 
@@ -386,10 +669,11 @@
                     />
                     <h3>Wince</h3>
                     <p>
-                        My first GUI project on my Python journey. Written as a
-                        frontend for the bash script "wtwitch" I chose tkinter
-                        as the Python-native toolkit. The program allows the
-                        user to watch live streams in a local media player.
+                        Mein erstes GUI-Projekt auf meiner Python-Reise. Als
+                        Frontend für das Bash-Skript "wtwitch" geschrieben,
+                        wählte ich tkinter als Python-natives Toolkit. Das
+                        Programm ermöglicht das Anschauen von Livestreams in
+                        einem lokalen Medienplayer.
                     </p>
                 </a>
 
@@ -405,11 +689,11 @@
                         class="project-image"
                         loading="lazy"
                     />
-                    <h3>Python Exercises</h3>
+                    <h3>Python-Übungen</h3>
                     <p>
-                        My learning progress in Python - solved exercises, small
-                        scripts, challenges from books/courses, and growing
-                        coding habits.
+                        Mein Lernfortschritt in Python: Gelöste Übungen, kleine
+                        Skripte, Herausforderungen aus Büchern/Kursen und
+                        wachsende Programmiergewohnheiten.
                     </p>
                 </a>
 
@@ -420,13 +704,14 @@
                         class="project-image"
                         loading="lazy"
                     />
-                    <h3>Raspberry Pi 4 Sensor Kit</h3>
+                    <h3>Raspberry Pi 4 Sensor-Kit</h3>
                     <p>
-                        My latest hobby project is to deepen my programming
-                        knowledge by tinkering with a sensor kit for my
-                        Raspberry Pi. Includes breadboards, displays, electric
-                        motors and all the sensors one might need for a weather
-                        station or motion detector.
+                        Mein aktuelles Hobbyprojekt, um meine
+                        Programmierkenntnisse zu vertiefen, indem ich mit einem
+                        Sensor-Kit für meinen Raspberry Pi experimentiere. Es
+                        enthält Breadboards, Displays, Elektromotoren und alle
+                        Sensoren für eine Wetterstation oder einen
+                        Bewegungsmelder.
                     </p>
                 </a>
 
@@ -439,9 +724,10 @@
                     />
                     <h3>Streamline</h3>
                     <p>
-                        Started as an AI-aided reimplementation of Wince in
-                        Libadwaita. Calls directly to the Twitch API and fits
-                        well with the GNOME desktop for Linux.
+                        Entstanden als KI-gestützte Neuimplementierung von Wince
+                        in Libadwaita. Streamline greift direkt auf die
+                        Twitch-API zu und fügt sich nahtlos in die
+                        GNOME-Desktop-Umgebung für Linux ein.
                     </p>
                 </a>
 
@@ -454,10 +740,11 @@
                     />
                     <h3>Nextcloud</h3>
                     <p>
-                        I run various services like Nextcloud as Docker
-                        containers on my own Ubuntu server. Secured with
-                        fail2ban, a reverse proxy and other measures, it's an
-                        exercise in network security.
+                        Ich betreibe verschiedene Dienste wie Nextcloud als
+                        Docker-Container auf meinem eigenen Ubuntu-Server.
+                        Gesichert mit fail2ban, einem Reverse-Proxy und weiteren
+                        Maßnahmen, ist das Projekt eine Übung in
+                        Netzwerksicherheit.
                     </p>
                 </a>
 
@@ -475,11 +762,11 @@
                     />
                     <h3>Mein Notfallplan</h3>
                     <p>
-                        A small digital companion for your mental health — a web
-                        app to keep track of what helps you in acute crises:
-                        reasons to keep going, calming thoughts, important
-                        contacts, and breathing exercises. Everything runs
-                        entirely in your browser, nothing leaves your device.
+                        Ein kleiner digitaler Begleiter für deine psychische
+                        Gesundheit – eine Web-App, die festhält, was dir in
+                        akuten Krisen hilft: Gründe weiterzumachen, beruhigende
+                        Gedanken, wichtige Kontakte und Atemübungen. Alles läuft
+                        vollständig im Browser, nichts verlässt dein Gerät.
                     </p>
                 </a>
 
@@ -497,11 +784,12 @@
                     />
                     <h3>Quilt</h3>
                     <p>
-                        Create beautiful image collages right in your browser.
-                        Quilt is a single-file, zero-dependency HTML application
-                        that lets you arrange images into custom-sized collages
-                        with multiple layout algorithms, interactive cropping,
-                        and high-resolution export.
+                        Erstelle wunderschöne Bildcollagen direkt im Browser.
+                        Quilt ist eine eigenständige HTML-Anwendung ohne
+                        Abhängigkeiten, mit der man Bilder in individuellen
+                        Collagen anordnen kann – mit mehreren
+                        Layout-Algorithmen, interaktivem Zuschneiden und Export
+                        in hoher Auflösung.
                     </p>
                 </a>
 
@@ -512,14 +800,38 @@
                         class="project-image"
                         loading="lazy"
                     />
-                    <h3>Excel class</h3>
+                    <h3>Excel-Kurs</h3>
                     <p>
-                        As part of a class on Microsoft Office, I refreshed my
-                        knowledge on the basics and delved into more advanced
-                        exercises for Excel spreadsheets.
+                        Im Rahmen eines Microsoft-Office-Kurses habe ich meine
+                        Grundkenntnisse aufgefrischt und mich in
+                        fortgeschrittene Übungen für Excel-Tabellen vertieft.
                     </p>
                 </a>
             </div>
+        </div>
+
+        <!-- Über mich – Anchor (top-left) -->
+        <div
+            class="about-anchor"
+            onclick="
+                document.getElementById('aboutOverlay').classList.add('active');
+                document.body.classList.add('no-scroll');
+            "
+        >
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+            Über mich
         </div>
 
         <!-- Theme toggle -->
@@ -545,6 +857,107 @@
                     d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
                 />
             </svg>
+        </div>
+
+        <!-- About overlay -->
+        <div
+            class="about-overlay"
+            id="aboutOverlay"
+            onclick="
+                if (event.target === this) {
+                    this.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                }
+            "
+        >
+            <div class="about-modal">
+                <div class="about-header">
+                    <button
+                        class="about-close"
+                        onclick="
+                            document
+                                .getElementById('aboutOverlay')
+                                .classList.remove('active');
+                            document.body.classList.remove('no-scroll');
+                        "
+                        aria-label="Schließen"
+                    >
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                    <div class="about-photo">
+                        <img src="images/foto.jpg" alt="Profilfoto" />
+                    </div>
+                    <h2>Jan Simon Fischer</h2>
+                    <div class="tagline">
+                        Angehender Fachinformatiker für Systemintegration
+                    </div>
+                    <div class="sub-tagline">
+                        Technikbegeistert • Lernbereit • Zuverlässig
+                    </div>
+                </div>
+
+                <div class="about-body">
+                    <div class="about-bio">
+                        <strong>Hallo!</strong> Ich bin Jan Simon Fischer – ein
+                        technisch-versierter Problemlöser mit fundierten
+                        praktischen IT-Kenntnissen und starken kommunikativen
+                        Fähigkeiten. Nach Jahren der eigenen Weiterbildung in
+                        den Bereichen Linux-Systemadministration,
+                        Netzwerktechnik und Programmierung möchte ich meine
+                        Leidenschaft nun in einer
+                        <strong
+                            >Ausbildung zum Fachinformatiker für
+                            Systemintegration</strong
+                        >
+                        vertiefen und einem Unternehmen als motivierter,
+                        zuverlässiger Azubi zur Seite stehen.
+                    </div>
+
+                    <div class="about-section-title">Vorerfahrungen</div>
+                    <div class="about-skills">
+                        <span>Linux-Systemverwaltung</span>
+                        <span>Serveradministration</span>
+                        <span>Python &amp; Scripting</span>
+                        <span>Netzwerkkonfiguration</span>
+                        <span>Docker &amp; Container</span>
+                        <span>Hardware-Troubleshooting</span>
+                        <span>Microsoft Office</span>
+                        <span>Englisch C1</span>
+                    </div>
+
+                    <div class="about-section-title">Kontakt</div>
+                    <div class="about-contact-item">
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                            <path
+                                d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+                            />
+                        </svg>
+                        <a href="mailto:mail@jfsen.org">mail@jfsen.org</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

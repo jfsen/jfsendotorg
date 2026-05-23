@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="50%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#6ee7b7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6ee7b7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="crossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a7f3d0"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background gradient -->
+  <rect width="600" height="338" fill="url(#bg)"/>
+
+  <!-- Glow behind cross -->
+  <circle cx="300" cy="140" r="100" fill="url(#glow)"/>
+
+  <!-- Decorative blurred circles -->
+  <circle cx="80" cy="280" r="80" fill="#34d399" opacity="0.12"/>
+  <circle cx="520" cy="60" r="60" fill="#0d9488" opacity="0.15"/>
+
+  <!-- Cross icon -->
+  <circle cx="300" cy="140" r="52" fill="#ffffff" stroke="#042f2e" stroke-width="5"/>
+  <rect x="266" y="126" width="68" height="28" rx="6" fill="url(#crossGrad)"/>
+  <rect x="286" y="106" width="28" height="68" rx="6" fill="url(#crossGrad)"/>
+
+  <!-- Title -->
+  <text x="300" y="250" text-anchor="middle" fill="#ffffff" font-family="system-ui,-apple-system,sans-serif" font-size="28" font-weight="700" letter-spacing="0.5">Mein Notfallplan</text>
+</svg>

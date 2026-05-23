@@ -229,6 +229,22 @@
                 border-color: rgba(167, 139, 250, 0.45);
             }
 
+            /* ── Static card (non-linked projects) ── */
+            .card--static {
+                cursor: default;
+            }
+
+            .card--static:hover,
+            .card--static:focus-visible {
+                transform: none;
+                box-shadow: none;
+                border-color: var(--card-border);
+            }
+
+            .card--static:hover::before {
+                opacity: 0;
+            }
+
             /* ═══════════════════════════════════════════
                PROJECT IMAGE
                ═══════════════════════════════════════════ */
@@ -707,7 +723,7 @@
                     </p>
                 </a>
 
-                <a href="#" class="card">
+                <div class="card card--static">
                     <img
                         src="images/rpi.jpg"
                         alt="Raspberry Pi 4 sensors project"
@@ -723,7 +739,7 @@
                         Sensoren für eine Wetterstation oder einen
                         Bewegungsmelder.
                     </p>
-                </a>
+                </div>
 
                 <a href="https://github.com/jfsen/Streamline" class="card">
                     <img
@@ -741,7 +757,7 @@
                     </p>
                 </a>
 
-                <a href="#" class="card">
+                <div class="card card--static">
                     <img
                         src="images/nextcloud.png"
                         alt="Nextcloud"
@@ -756,7 +772,7 @@
                         Maßnahmen, ist das Projekt eine Übung in
                         Netzwerksicherheit.
                     </p>
-                </a>
+                </div>
 
                 <a
                     href="https://notfallplan.jfsen.org"

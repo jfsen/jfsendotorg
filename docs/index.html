@@ -11,8 +11,45 @@
         <title>jfsen • Projekte</title>
 
         <style>
+            /* ╔══════════════════════════════════════════╗
+               ║          TABLE OF CONTENTS               ║
+               ╚══════════════════════════════════════════╝
+               CSS
+                01  Theme Tokens ......................  52
+                02  Reset .............................  93
+                03  Body & Background ................. 103
+                04  Layout Containers ................. 146
+                05  Header & Title ...................  162
+                06  Cards Grid .......................  202
+                07  Card (Project Tile) ..............  214
+                     07a  Card Glow Overlay ..........  239
+                     07b  Static Card ................  269
+                08  Project Image ....................  286
+                09  Theme Toggle Button ..............  326
+                10  About — Anchor ...................  351
+                11  About — Overlay ..................  388
+                12  About — Modal ....................  415
+                13  Mobile Overrides .................  576
+                14  Reduced Motion ...................  679
+
+               HTML
+                15  Header ...........................  714
+                16  Cards ............................  724
+                     16a  Wince ......................  727
+                     16b  Python-Übungen .............  750
+                     16c  RPi Sensor-Kit .............  771
+                     16d  Streamline .................  790
+                     16e  Nextcloud ..................  807
+                     16f  Mein Notfallplan ...........  825
+                     16g  Quilt ......................  848
+                     16h  Excel-Kurs .................  872
+                17  Theme Toggle .....................  891
+                18  About — Anchor ...................  919
+                19  About — Overlay / Modal ..........  946
+               ═══════════════════════════════════════════ */
+
             /* ═══════════════════════════════════════════
-               THEME TOKENS (CSS custom properties)
+               01 — THEME TOKENS (CSS custom properties)
                ═══════════════════════════════════════════ */
 
             :root {
@@ -53,7 +90,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               RESET
+               02 — RESET
                ═══════════════════════════════════════════ */
 
             * {
@@ -63,7 +100,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               BODY & BACKGROUND
+               03 — BODY & BACKGROUND
                ═══════════════════════════════════════════ */
 
             body {
@@ -106,7 +143,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               LAYOUT CONTAINERS
+               04 — LAYOUT CONTAINERS
                ═══════════════════════════════════════════ */
 
             .container {
@@ -122,7 +159,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               HEADER & TITLE
+               05 — HEADER & TITLE
                ═══════════════════════════════════════════ */
 
             header {
@@ -162,7 +199,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               CARDS GRID
+               06 — CARDS GRID
                ═══════════════════════════════════════════ */
 
             .cards {
@@ -174,7 +211,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               CARD (individual project tile)
+               07 — CARD (individual project tile)
                ═══════════════════════════════════════════ */
 
             .card {
@@ -199,7 +236,7 @@
                 will-change: transform;
             }
 
-            /* ── Card glow overlay (revealed on hover) ── */
+            /* 07a — Card glow overlay (revealed on hover) */
             .card::before {
                 content: "";
                 position: absolute;
@@ -229,7 +266,7 @@
                 border-color: rgba(167, 139, 250, 0.45);
             }
 
-            /* ── Static card (non-linked projects) ── */
+            /* 07b — Static card (non-linked projects) */
             .card--static {
                 cursor: default;
             }
@@ -246,7 +283,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               PROJECT IMAGE
+               08 — PROJECT IMAGE
                ═══════════════════════════════════════════ */
 
             .project-image {
@@ -286,7 +323,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               THEME TOGGLE BUTTON
+               09 — THEME TOGGLE BUTTON
                ═══════════════════════════════════════════ */
 
             .theme-toggle {
@@ -311,7 +348,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               ABOUT – ANCHOR (top-left)
+               10 — ABOUT – ANCHOR (top-left)
                ═══════════════════════════════════════════ */
 
             .about-anchor {
@@ -348,7 +385,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               ABOUT – OVERLAY
+               11 — ABOUT – OVERLAY
                ═══════════════════════════════════════════ */
 
             .about-overlay {
@@ -375,7 +412,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               ABOUT – MODAL
+               12 — ABOUT – MODAL
                ═══════════════════════════════════════════ */
 
             .about-modal {
@@ -536,7 +573,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               MOBILE OVERRIDES  (max-width: 768px)
+               13 — MOBILE OVERRIDES  (max-width: 768px)
                ═══════════════════════════════════════════ */
             @media (max-width: 768px) {
                 .about-anchor {
@@ -639,7 +676,7 @@
             }
 
             /* ═══════════════════════════════════════════
-               REDUCED MOTION  (user preference)
+               14 — REDUCED MOTION  (user preference)
                ═══════════════════════════════════════════ */
             @media (prefers-reduced-motion: reduce) {
                 h1 {
@@ -673,6 +710,9 @@
     </head>
     <body>
         <div class="container">
+            <!-- ═══════════════════════════════════════
+                 15 — HEADER
+                 ═══════════════════════════════════════ -->
             <header>
                 <h1>jfsen</h1>
                 <div class="subtitle">
@@ -680,7 +720,11 @@
                 </div>
             </header>
 
+            <!-- ═══════════════════════════════════════
+                 16 — CARDS
+                 ═══════════════════════════════════════ -->
             <div class="cards">
+                <!-- 16a — Wince -->
                 <a
                     href="https://github.com/jfsen/Wince"
                     class="card"
@@ -703,6 +747,7 @@
                     </p>
                 </a>
 
+                <!-- 16b — Python-Übungen -->
                 <a
                     href="https://github.com/jfsen/Python-exercises"
                     class="card"
@@ -723,6 +768,7 @@
                     </p>
                 </a>
 
+                <!-- 16c — Raspberry Pi 4 Sensor-Kit -->
                 <div class="card card--static">
                     <img
                         src="images/rpi.jpg"
@@ -741,6 +787,7 @@
                     </p>
                 </div>
 
+                <!-- 16d — Streamline -->
                 <a href="https://github.com/jfsen/Streamline" class="card">
                     <img
                         src="images/streamline.png"
@@ -757,6 +804,7 @@
                     </p>
                 </a>
 
+                <!-- 16e — Nextcloud -->
                 <div class="card card--static">
                     <img
                         src="images/nextcloud.png"
@@ -774,6 +822,7 @@
                     </p>
                 </div>
 
+                <!-- 16f — Mein Notfallplan -->
                 <a
                     href="https://notfallplan.jfsen.org"
                     class="card"
@@ -796,6 +845,7 @@
                     </p>
                 </a>
 
+                <!-- 16g — Quilt -->
                 <a
                     href="https://quilt.jfsen.org"
                     class="card"
@@ -819,6 +869,7 @@
                     </p>
                 </a>
 
+                <!-- 16h — Excel-Kurs -->
                 <a href="https://github.com/jfsen/Excel-uebungen" class="card">
                     <img
                         src="images/excel-uebungen.jpeg"
@@ -836,6 +887,9 @@
             </div>
         </div>
 
+        <!-- ═══════════════════════════════════════
+             17 — THEME TOGGLE
+             ═══════════════════════════════════════ -->
         <!-- Theme toggle -->
         <div
             class="theme-toggle"
@@ -861,6 +915,9 @@
             </svg>
         </div>
 
+        <!-- ═══════════════════════════════════════
+             18 — ABOUT — ANCHOR
+             ═══════════════════════════════════════ -->
         <!-- Über mich – Anchor (top-left) -->
         <div
             class="about-anchor"
@@ -885,6 +942,9 @@
             Über mich
         </div>
 
+        <!-- ═══════════════════════════════════════
+             19 — ABOUT — OVERLAY / MODAL
+             ═══════════════════════════════════════ -->
         <!-- About overlay -->
         <div
             class="about-overlay"

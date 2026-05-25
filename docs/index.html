@@ -17,35 +17,35 @@
                CSS
                 01  Theme Tokens ......................  52
                 02  Reset .............................  93
-                03  Body & Background ................. 103
-                04  Layout Containers ................. 146
+                03  Body & Background ................  103
+                04  Layout Containers ................  146
                 05  Header & Title ...................  162
                 06  Cards Grid .......................  202
                 07  Card (Project Tile) ..............  214
                      07a  Card Glow Overlay ..........  239
                      07b  Static Card ................  269
-                08  Project Image ....................  286
-                09  Theme Toggle Button ..............  326
-                10  About — Anchor ...................  351
-                11  About — Overlay ..................  388
-                12  About — Modal ....................  415
-                13  Mobile Overrides .................  576
-                14  Reduced Motion ...................  679
+                08  Project Image ....................  275
+                09  Theme Toggle Button ..............  315
+                10  About — Anchor ...................  340
+                11  About — Overlay ..................  377
+                12  About — Modal ....................  404
+                13  Mobile Overrides .................  565
+                14  Reduced Motion ...................  668
 
                HTML
-                15  Header ...........................  714
-                16  Cards ............................  724
-                     16a  Wince ......................  727
-                     16b  Python-Übungen .............  750
-                     16c  RPi Sensor-Kit .............  771
-                     16d  Streamline .................  790
-                     16e  Nextcloud ..................  807
-                     16f  Mein Notfallplan ...........  825
-                     16g  Quilt ......................  848
-                     16h  Excel-Kurs .................  872
-                17  Theme Toggle .....................  891
-                18  About — Anchor ...................  919
-                19  About — Overlay / Modal ..........  946
+                15  Header ...........................  703
+                16  Cards ............................  713
+                     16a  Wince ......................  716
+                     16b  Python-Übungen .............  739
+                     16c  RPi Sensor-Kit .............  760
+                     16d  Streamline .................  779
+                     16e  Nextcloud ..................  796
+                     16f  Mein Notfallplan ...........  814
+                     16g  Quilt ......................  837
+                     16h  Excel-Kurs .................  861
+                17  Theme Toggle .....................  880
+                18  About — Anchor ...................  908
+                19  About — Overlay / Modal ..........  935
                ═══════════════════════════════════════════ */
 
             /* ═══════════════════════════════════════════
@@ -269,17 +269,6 @@
             /* 07b — Static card (non-linked projects) */
             .card--static {
                 cursor: default;
-            }
-
-            .card--static:hover,
-            .card--static:focus-visible {
-                transform: none;
-                box-shadow: none;
-                border-color: var(--card-border);
-            }
-
-            .card--static:hover::before {
-                opacity: 0;
             }
 
             /* ═══════════════════════════════════════════

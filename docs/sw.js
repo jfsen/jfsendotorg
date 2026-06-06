@@ -1,4 +1,4 @@
-const CACHE_NAME = "jfsen-v1";
+const CACHE_NAME = "jfsen-v2";
 
 const PRECACHE_URLS = [
   "/",

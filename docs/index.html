@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-theme="light">
+<html lang="de">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,40 +90,39 @@
                ═══════════════════════════════════════════ */
 
             :root {
-                /* ── Base dark theme ── */
-                --bg-base: #0f0f1a;
+                /* ── Base light theme ── */
+                --bg-base: #f8fafc;
                 --accent: #7c3aed;
                 --accent-glow: #a78bfa66;
                 --accent-secondary: #ec4899;
-                --text-primary: #f1f5f9;
-                --text-secondary: #94a3b8;
-                --card-bg: rgba(30, 30, 60, 0.35);
-                --card-border: rgba(120, 113, 166, 0.18);
-                --card-glow: rgba(124, 58, 237, 0.15);
-                --radius: 1.6rem;
-                --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-                /* ── About modal ── */
-                --about-bg: #1a1a35;
-                --about-header-bg: #22224a;
-                --about-border: rgba(167, 139, 250, 0.15);
-                --about-close-bg: #2e2e52;
-                --about-text-secondary: #cbd5e1;
-            }
-
-            /* ── Light theme override ── */
-            [data-theme="light"] {
-                --bg-base: #f8fafc;
                 --text-primary: #0f172a;
                 --text-secondary: #475569;
                 --card-bg: rgba(255, 255, 255, 0.65);
                 --card-border: rgba(226, 232, 240, 0.7);
                 --card-glow: rgba(124, 58, 237, 0.08);
+                --radius: 1.6rem;
+                --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
                 /* ── About modal ── */
                 --about-bg: #ffffff;
                 --about-header-bg: #f1f5f9;
                 --about-border: rgba(226, 232, 240, 0.9);
                 --about-close-bg: #e2e8f0;
                 --about-text-secondary: var(--text-secondary);
+            }
+
+            /* ── Dark theme override ── */
+            [data-theme="dark"] {
+                --bg-base: #0f0f1a;
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --card-bg: rgba(30, 30, 60, 0.35);
+                --card-border: rgba(120, 113, 166, 0.18);
+                --card-glow: rgba(124, 58, 237, 0.15);
+                /* ── About modal ── */
+                --about-bg: #1a1a35;
+                --about-header-bg: #22224a;
+                --about-border: rgba(167, 139, 250, 0.15);
+                --about-close-bg: #2e2e52;
             }
 
             /* ═══════════════════════════════════════════
@@ -915,13 +914,21 @@
              17 — THEME TOGGLE
              ═══════════════════════════════════════ -->
         <!-- Theme toggle -->
+        <script>
+            (function () {
+                var saved = localStorage.getItem("theme");
+                if (saved === "dark") {
+                    document.documentElement.dataset.theme = "dark";
+                }
+            })();
+        </script>
         <div
             class="theme-toggle"
             onclick="
-                document.documentElement.dataset.theme =
-                    document.documentElement.dataset.theme === 'dark'
-                        ? 'light'
-                        : 'dark'
+                var html = document.documentElement;
+                var next = html.dataset.theme === 'dark' ? '' : 'dark';
+                html.dataset.theme = next;
+                localStorage.setItem('theme', next || 'light');
             "
         >
             <svg
